@@ -2,6 +2,7 @@
 
 sudoku(Puzzle, Solution) :-
     Solution = Puzzle,
-    max_list(Puzzle, M), M < 5.
-    %fd_dom(Puzzle, 1, 4).
+    max_list(Puzzle, M), M < 5,
+    length(Puzzle, 16).
+
 
