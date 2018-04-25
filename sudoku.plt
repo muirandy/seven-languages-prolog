@@ -26,4 +26,24 @@ test(gridTooBig, fail) :- sudoku([4,1,2,3,
                       3,4,1,2,
                       2], _).
 
+test(noRepeatsOnRow1, fail) :- sudoku([4,1,2,4,
+                      2,3,4,1,
+                      1,2,3,4,
+                      3,4,1,2],_).
+
+test(noRepeatsOnRow2, fail) :- sudoku([4,1,2,3,
+                      2,3,4,2,
+                      1,2,3,4,
+                      3,4,1,2],_).
+
+test(noRepeatsOnRow3, fail) :- sudoku([4,1,2,3,
+                      2,3,4,1,
+                      1,2,3,1,
+                      3,4,1,2],_).
+
+test(noRepeatsOnRow4, fail) :- sudoku([4,1,2,3,
+                      2,3,4,1,
+                      1,2,3,4,
+                      3,4,1,3],_).
+
 :- end_tests(sudoku).
