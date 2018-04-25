@@ -13,11 +13,7 @@ test(noBlanks) :- sudoku([4,1,2,3,
 test(range, fail) :- sudoku([4,1,2,9,
                       2,3,4,5,
                       1,2,3,4,
-                      3,4,5,6], Solution),
+                      3,4,5,6], _).
 
-    assertion(Solution == [4,1,2,3,
-                           2,3,4,1,
-                           1,2,3,4,
-			   3,4,1,2]).
 
 :- end_tests(sudoku).
