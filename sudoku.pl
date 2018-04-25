@@ -3,7 +3,6 @@
 sudoku(Puzzle, Solution) :-
     Solution = Puzzle,
     max_list(Puzzle, M), M < 5,
-    length(Puzzle, 16),
      Puzzle = [S11,S12,S13,S14,
                S21,S22,S23,S24,
                S31,S32,S33,S34,
