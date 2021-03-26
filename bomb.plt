@@ -11,4 +11,6 @@ test(two) :- defuse((1,1), (1,1), 2, 0).
 test(two) :- defuse((1,0), (1,1), 2, 1).
 test(two) :- defuse((1,1), (1,0), 2, 1).
 
+test(two) :- defuse((1,0), (1,0), 2, 2).
+
 :- end_tests(bomb).
