@@ -42,4 +42,6 @@ test(two) :- defuse(1,1, 1,0, 2, []).
 
 test(two) :- defuse(1,0, 1,0, 2, []).
 
+test(six) :- defuse(3,0, 5,0, 4, []).
+
 :- end_tests(bomb3Safe).

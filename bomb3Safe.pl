@@ -19,22 +19,19 @@ writeSteps([Head|Tail]) :-
   write(Head), nl,
   writeSteps(Tail).
 
-isEmpty(A,B) :-
-  A =:= 0,
-  B =:= 0.
 
-isOldState(A,B) :-
+isExistingState(0,0).
+isExistingState(A,B) :-
   memberchk(A, B).
 isNewState(A,B) :-
-  %write('Checking: '), write(A), write(' is in: '), write(B), nl,
-  \+ isOldState(A,B).
+  \+ isExistingState(A,B).
 
 
 % Status
 isNotFull(A,B) :- A > B.
 
-fillA(A,B) :- write('Fill A'), nl.
-fillB(C,D) :- write('Fill B'), nl.
+fillA(A,B). % :- write('Fill A'), nl.
+fillB(C,D). % :- write('Fill B'), nl.
 
 % Empty
 emptyA(). % :- write('Empty A'), nl.
