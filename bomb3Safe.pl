@@ -20,7 +20,7 @@ writeSteps([Head|Tail]) :-
   writeSteps(Tail).
 
 
-isExistingState(0,0).
+isExistingState((0,0),_).
 isExistingState(A,B) :-
   memberchk(A, B).
 isNewState(A,B) :-
@@ -83,7 +83,6 @@ defuse(_,B, _,D, E, H) :-
 % Fill A
 defuse(A,B, C,D, E, H) :-
   isNotSolvedAlready(B,D,E),
-  A =\= B,
   isNotFull(A,B),
   isNewState((A,D), H),
   fillA(A,B),
@@ -93,7 +92,6 @@ defuse(A,B, C,D, E, H) :-
 % Fill B
 defuse(A,B, C,D, E, H) :-
   isNotSolvedAlready(B,D,E),
-  C =\= D,
   isNotFull(C,D),
   isNewState((B,C), H),
   fillB(C,D),
@@ -103,6 +101,7 @@ defuse(A,B, C,D, E, H) :-
 % Fill B from A
 defuse(A,B, C,D, E, H) :-
   B > 0,
+  isNotFull(C,D),
   isNotSolvedAlready(B,D,E),
   bFromA(A,B,C,D,X,Y),
   isNewState((X,Y), H),
@@ -113,6 +112,7 @@ defuse(A,B, C,D, E, H) :-
 % Fill A from B
 defuse(A,B, C,D, E, H) :-
   D > 0,
+  isNotFull(A,B),
   isNotSolvedAlready(B,D,E),
   aFromB(A,B,C,D,X,Y),
   isNewState((X,Y), H),
