@@ -4,9 +4,6 @@
 test(bFromA) :- bFromA(10,1,10,0,0,1).
 test(bFromA) :- bFromA(5,4,5,4,3,5).
 
-test(aFromB) :- aFromB(10,0,10,1,1,0).
-test(aFromB) :- aFromB(5,4,5,4,5,3).
-
 test(newState) :- isNewState((1,1),[]).
 test(newState) :- isNewState((1,1),[(1,2)]).
 test(newState) :- \+ isNewState((1,2),[(1,2)]).
