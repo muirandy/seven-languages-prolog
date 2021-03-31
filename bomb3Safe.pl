@@ -29,13 +29,11 @@ alreadySolved(B,D,E) :-
 isNotSolvedAlready(B,D,E) :-
   \+ alreadySolved(B,D,E).
 
-%isExistingState((0,0),_).
 isExistingState(A,B) :-
   memberchk(A, B).
 isNewState(A,B) :-
   \+ isExistingState(A,B).
 
-% Status
 isNotFull(A,B) :- A > B.
 
 fillA(A,B,C,D,E,H) :-
@@ -52,7 +50,6 @@ fillB(A,B,C,D,E,H) :-
   append([(B,C)], H, NEW_H),
   defuse(A,B,C,C,E,NEW_H).
 
-% Empty
 emptyA(A,B,C,D,E,H) :-
   isNotSolvedAlready(B,D,E),
   B > 0,
