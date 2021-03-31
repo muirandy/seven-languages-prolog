@@ -23,12 +23,6 @@ writeSteps([Head|Tail]) :-
   write(Head), nl,
   writeSteps(Tail).
 
-writeAll(A,B,C,D,E,H) :-
-  write('('), write(A), write(','), write(B), write(') '),
-  write('('), write(C), write(','), write(D), write(') '),
-  write('E='), write(E),
-  write(' H: '), write(H), nl.
-
 alreadySolved(B,D,E) :-
   B is E; D is E; E is B + D.
 
@@ -66,7 +60,6 @@ emptyA(A,B,C,D,E,H) :-
   C =\= D,
   isNewState((0,D), H),
   append([(0,D)], H, NEW_H),
-  writeAll(A,0,C,D,E,NEW_H),
   defuse(A,0, C,D,E, NEW_H).
 
 emptyB(A,B,C,D,E,H) :-
