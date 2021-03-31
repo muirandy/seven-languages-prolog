@@ -100,9 +100,9 @@ bFromA(_,B,C,D,X,Y) :-
   % B cannot hold all liquid
   LIQUID > C,
   X is LIQUID - C,
-  Y is LIQUID - X.
+  Y is C.
 
-aFromB(A,B,_,D,X,Y) :-
+aFromB(A,B,C,D,X,Y) :-
   LIQUID is B + D,
   % A can hold all liquid
   LIQUID =< A,
@@ -114,16 +114,14 @@ aFromB(A,B,_,D,X,Y) :-
   % A cannot hold all liquid
   LIQUID > A,
   Y is LIQUID - A,
-  X is LIQUID - Y.
+  X is A.
 
 fillBFromA(A,B, C,D, E, H) :-
   B > 0,
   isNotFull(C,D),
   isNotSolvedAlready(B,D,E),
   bFromA(A,B,C,D,X,Y),
-  bFromA(A,B,C,D,X,Y),
   isNewState((X,Y), H),
-  %write('Fill B from A'), nl,
   append([(X,Y)], H, NEW_H),
   defuse(A,X,C,Y,E,NEW_H).
 
@@ -133,9 +131,7 @@ fillAFromB(A,B,C,D,E,H) :-
   isNotSolvedAlready(B,D,E),
   aFromB(A,B,C,D,X,Y),
   isNewState((X,Y), H),
-  %write('Fill A from B'), nl,
   append([(X,Y)], H, NEW_H),
-  writeAll(A,X,C,Y,E,NEW_H),
   defuse(A,X,C,Y,E,NEW_H).
 
 writeDefuseSuccessfully(H) :-
