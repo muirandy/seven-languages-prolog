@@ -35,15 +35,11 @@ alreadySolved(B,D,E) :-
 isNotSolvedAlready(B,D,E) :-
   \+ alreadySolved(B,D,E).
 
-willBeSolved(B,D,E) :-
-  write('---Next step?: '), write(B), write(','), write(D), nl.
-
 %isExistingState((0,0),_).
 isExistingState(A,B) :-
   memberchk(A, B).
 isNewState(A,B) :-
   \+ isExistingState(A,B).
-
 
 % Status
 isNotFull(A,B) :- A > B.
@@ -52,8 +48,6 @@ fillA(A,B,C,D,E,H) :-
   isNotSolvedAlready(B,D,E),
   isNotFull(A,B),
   isNewState((A,D), H),
-  write('Fill A'), nl,
-  willBeSolved(A,D,E),
   append([(A,D)], H, NEW_H),
   defuse(A,A,C,D,E,NEW_H).
 
@@ -61,7 +55,6 @@ fillB(A,B,C,D,E,H) :-
   isNotSolvedAlready(B,D,E),
   isNotFull(C,D),
   isNewState((B,C), H),
-  write('Fill B'), nl,
   append([(B,C)], H, NEW_H),
   defuse(A,B,C,C,E,NEW_H).
 
@@ -73,7 +66,6 @@ emptyA(A,B,C,D,E,H) :-
   C =\= D,
   isNewState((0,D), H),
   append([(0,D)], H, NEW_H),
-  write('Empty A'), nl,
   writeAll(A,0,C,D,E,NEW_H),
   defuse(A,0, C,D,E, NEW_H).
 
@@ -83,7 +75,6 @@ emptyB(A,B,C,D,E,H) :-
    D > 0,
    A =\= B,
    isNewState((B,0), H),
-   write('Empty B'), nl,
    append([(B,0)], H, NEW_H),
    defuse(A,B, C,0, E, NEW_H).
 
