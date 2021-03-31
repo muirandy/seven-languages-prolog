@@ -8,6 +8,7 @@
   fillBFromA/6,
   fillAFromB/6,
   emptyA/6,
+  emptyB/6,
   aFromB/6,
   bFromA/6]).
 
@@ -29,6 +30,14 @@ writeAll(A,B,C,D,E,H) :-
   write('E='), write(E),
   write(' H: '), write(H), nl.
 
+alreadySolved(B,D,E) :-
+  B is E; D is E; E is B + D.
+
+isNotSolvedAlready(B,D,E) :-
+  \+ alreadySolved(B,D,E).
+
+willBeSolved(B,D,E) :-
+  write('---Next step?: '), write(B), write(','), write(D), nl.
 
 %isExistingState((0,0),_).
 isExistingState(A,B) :-
@@ -45,6 +54,7 @@ fillA(A,B,C,D,E,H) :-
   isNotFull(A,B),
   isNewState((A,D), H),
   write('Fill A'), nl,
+  willBeSolved(A,D,E),
   append([(A,D)], H, NEW_H),
   defuse(A,A,C,D,E,NEW_H).
 
@@ -60,6 +70,8 @@ fillB(A,B,C,D,E,H) :-
 emptyA(A,B,C,D,E,H) :-
   isNotSolvedAlready(B,D,E),
   B > 0,
+  D > 0,
+  C =\= D,
   isNewState((0,D), H),
   append([(0,D)], H, NEW_H),
   write('Empty A'), nl,
@@ -68,7 +80,9 @@ emptyA(A,B,C,D,E,H) :-
 
 emptyB(A,B,C,D,E,H) :-
    isNotSolvedAlready(B,D,E),
+   B > 0,
    D > 0,
+   A =\= B,
    isNewState((B,0), H),
    write('Empty B'), nl,
    append([(B,0)], H, NEW_H),
@@ -124,23 +138,27 @@ fillAFromB(A,B,C,D,E,H) :-
   writeAll(A,X,C,Y,E,NEW_H),
   defuse(A,X,C,Y,E,NEW_H).
 
-alreadySolved(B,D,E) :-
-  B is E; D is E; E is B + D.
-
-isNotSolvedAlready(B,D,E) :-
-  \+ alreadySolved(B,D,E).
+writeDefuseSuccessfully(H) :-
+  count(STEPS, H),
+  write('---- Defused Successfully in '), write(STEPS), write(' Steps! ----'), nl,
+  writeSteps(H).
 
 % Public method
-defuse(A,B,C,D,E) :- defuse(A,B,C,D,E,[(0,0)]).
+defuse(A,B,C,D,E) :- defuse(A,B,C,D,E,[]).
 
-% Defused! Success!!
 defuse(_,_, _,_, 0, _) :- write('Nothing to Defuse!'), nl.
 
+defuse(_,B, _,_, E, H) :-
+  B is E,
+  writeDefuseSuccessfully(H).
+
+defuse(_,_, _,D, E, H) :-
+  D is E,
+  writeDefuseSuccessfully(H).
+
 defuse(_,B, _,D, E, H) :-
-  B is E; D is E; E is B + D,
-  count(STEPS, H),
-  write('---- defuse 1 - Defused Successfully in '), write(STEPS), write(' Steps! ----'), nl,
-  writeSteps(H).
+  E is B + D,
+  writeDefuseSuccessfully(H).
 
 defuse(A,B, C,D, E, H) :- fillA(A,B,C,D,E,H).
 
