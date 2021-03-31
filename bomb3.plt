@@ -27,23 +27,23 @@ test(isNotSolvedAlready) :- isNotSolvedAlready(1,1,3).
 
 % (Volume,Current),(Volume,Current),Needed,Turns,History
 
-test(zero) :- defuse(1,0, 1,0, 0, []).
-test(zero) :- defuse(1,1, 1,0, 0, []).
-test(zero) :- defuse(1,0, 1,1, 0, []).
-test(zero) :- defuse(1,1, 5,0, 1, []).
-test(zero) :- defuse(5,0, 1,1, 1, []).
-test(zero) :- defuse(1,1, 1,1, 2, []).
+test(zero) :- defuse(1,0, 1,0, 0).
+test(zero) :- defuse(1,1, 1,0, 0).
+test(zero) :- defuse(1,0, 1,1, 0).
+test(zero) :- defuse(1,1, 5,0, 1).
+test(zero) :- defuse(5,0, 1,1, 1).
+test(zero) :- defuse(1,1, 1,1, 2).
 
-test(empty) :- defuse(1,1, 2,2, 2, []).
+test(empty) :- defuse(1,1, 2,2, 2).
 
-test(one) :- defuse(1,0, 5,0, 1, []).
-test(one) :- defuse(5,0, 1,0, 1, []).
+test(one) :- defuse(1,0, 5,0, 1).
+test(one) :- defuse(5,0, 1,0, 1).
 
-test(two) :- defuse(1,0, 1,1, 2, []).
-test(two) :- defuse(1,1, 1,0, 2, []).
+test(two) :- defuse(1,0, 1,1, 2).
+test(two) :- defuse(1,1, 1,0, 2).
 
-test(two) :- defuse(1,0, 1,0, 2, []).
+test(two) :- defuse(1,0, 1,0, 2).
 
-test(six) :- defuse(3,0, 5,0, 4, []).
+test(six) :- defuse(3,0, 5,0, 4).
 
 :- end_tests(bomb3Safe).
