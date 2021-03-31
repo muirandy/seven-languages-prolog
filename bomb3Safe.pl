@@ -9,7 +9,7 @@
   fillAFromB/6,
   emptyA/6,
   emptyB/6,
-  bFromA/6]).
+  fillFrom/6]).
 
 use_module(library(lists)).
 
@@ -71,14 +71,14 @@ emptyB(A,B,C,D,E,H) :-
    append([(B,0)], H, NEW_H),
    defuse(A,B, C,0, E, NEW_H).
 
-bFromA(_,B,C,D,X,Y) :-
+fillFrom(_,B,C,D,X,Y) :-
   LIQUID is B + D,
   % B can hold all liquid
   LIQUID =< C,
   X is 0,
   Y is LIQUID.
 
-bFromA(_,B,C,D,X,Y) :-
+fillFrom(_,B,C,D,X,Y) :-
   LIQUID is B + D,
   % B cannot hold all liquid
   LIQUID > C,
@@ -89,7 +89,7 @@ fillBFromA(A,B, C,D, E, H) :-
   B > 0,
   isNotFull(C,D),
   isNotSolvedAlready(B,D,E),
-  bFromA(A,B,C,D,X,Y),
+  fillFrom(A,B,C,D,X,Y),
   isNewState((X,Y), H),
   append([(X,Y)], H, NEW_H),
   defuse(A,X,C,Y,E,NEW_H).
@@ -98,7 +98,7 @@ fillAFromB(A,B,C,D,E,H) :-
   D > 0,
   isNotFull(A,B),
   isNotSolvedAlready(B,D,E),
-  bFromA(C,D,A,B,Y,X),
+  fillFrom(C,D,A,B,Y,X),
   isNewState((X,Y), H),
   append([(X,Y)], H, NEW_H),
   defuse(A,X,C,Y,E,NEW_H).
